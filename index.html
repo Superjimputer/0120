@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $.ajax({
+                url:"http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&appid=b1ecbccd638b763d489602917ba47cc3&units=metric",
+                dataType:"json",
+                success:function(e){
+//                    console.log(e.coord.lon);
+//                    console.log(e.name);
+//                    console.log(e.main.temp);
+//                    console.log(e.weather[0].description);
+                    $(".city").text(e.name);
+                    $(".temp").text(e.main.temp);
+                    $(".description").text(e.weather[0].description);
+                },
+                error:function(){
+                    console.log("AJAX ERROR!!!!!");
+                    alert("ERROOOOOOOR!!!!!");
+                },
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="city"></div>
+        <div class="temp"></div>
+        <div class="description"></div>
+    </div>
+</body>
+</html>

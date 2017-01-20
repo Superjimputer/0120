@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- 最新編譯和最佳化的 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- 選擇性佈景主題 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+    <!-- 最新編譯和最佳化的 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+   
+    <script>
+        $(function () {
+            $.ajax({
+                url: "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei,tw&units=imperial&cnt=14&appid=b1ecbccd638b763d489602917ba47cc3",
+                dataType: "json",
+                success: function (e) {
+                    $(".container").append(e.city.name);
+                    $(e.list).each(function () {
+
+                        var myDate = new Date(this.dt*1000);
+                        var year = myDate.getFullYear();
+                        var month = myDate.getMonth()+1;
+                        var __date = myDate.getDate();
+                        var day = myDate.getDay();
+
+//                        console.log(myDate);
+
+                        //   var c = "<div class='date'>日期："+this.dt+"</div>"
+
+//                       var DAY = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
+                        
+                           var DAY = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+                       var c = "<div class ='date'>日期:"+year+"年"+month+"日"+__date+"日  "+DAY[day]+"</div>"
+
+                        //   if (day==0){day="日"}
+                       
+                        c += "<div class='temp'>今日溫度：" + parseInt(this.temp.day)+"&deg"+"F" +"</div>"
+                        c += "<div class='weather'>今日天氣：" + this.weather[0].description + "</div>"
+                        
+//                        c += "<div class='icon'>" + this.weather[0].icon + "</div><hr>"
+                        
+                        c += "<div class='icon'><img src='images/10d.png'></div><hr>"
+                        
+//                        c += "<div class='icon'><img src='http://openweathermap.org/img/w/"+this.weather[0].icon+".png'></div><hr>"
+                        
+                        $(".container").append(c);
+
+                    });
+                },
+                error: function () {
+                    console.log("ERROR");
+                }
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+<!--
+    <script>
+        $(function () {
+            var myDate = new Date();
+            console.log(myDate);
+            var _date = myDate.toDateString();
+            console.log(_date);
+            var _time = myDate.toTimeString();
+            console.log(_date);
+
+            var year = myDate.getFullYear();
+            var month = myDate.getMonth() + 1;
+            var __date = myDate.getDate();
+            var day = myDate.getDay();
+            console.log(year);
+            console.log(month);
+            console.log(__date);
+            console.log(day);
+
+            var hours = myDate.getHours();
+            var minutes = myDate.getMinutes();
+            var seconds = myDate.getSeconds();
+            console.log(hours);
+            console.log(minutes);
+            console.log(seconds);
+        })
+    </script>
+-->
+
+    <div class="container">
+
+    </div>
+</body>
+
+</html>
